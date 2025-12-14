@@ -1,13 +1,11 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db = "todo";
+$host = getenv("DB_HOST") ?: "localhost";
+$user = getenv("DB_USER") ?: "root";
+$pass = getenv("DB_PASS") ?: "";
+$db   = getenv("DB_NAME") ?: "todo";
 
 $conn = new mysqli($host, $user, $pass, $db);
 
 if ($conn->connect_error) {
-    http_response_code(500);
-    die(json_encode(["error" => "Database connection failed"]));
+    die(json_encode(["error" => "DB connection failed"]));
 }
-?>
